@@ -1,6 +1,6 @@
 # CLAUDE.md – wp-app-starter
 
-Composer project `saij/wp-app-starter`: `composer create-project saij/wp-app-starter <dir>` creates a theme, child theme or plugin built with [wp-app-framework](https://github.com/saijsaij/wp-app-framework). The installer (`installer/`) asks the questions in `post-create-project-cmd`, renders the parts of `skeleton/` into the project, removes the starter's own files and runs `composer update` and, with Node 24, `npm install` and `npm run build`. Framework principles and rules: the framework's CLAUDE.md and its [documentation](https://saijsaij.github.io/wp-app-framework/); this file covers the starter.
+Composer project `saij/wp-app-starter`: `composer create-project saij/wp-app-starter <dir>` creates a theme, child theme or plugin built with [wp-app-framework](https://github.com/saijsaij/wp-app-framework). The installer (`installer/`) asks the questions in `post-create-project-cmd`, renders the parts of `skeleton/` into the project, removes the starter's own files and runs `composer update` and, with Node 24, `npm install` and `npm run build`. Framework principles, conventions and testing rules: the [developer documentation](https://saijsaij.github.io/wp-app-framework/next/development/) (in the framework checkout `docs/content/development/`) and the framework's CLAUDE.md; this file covers the starter.
 
 ## Rules
 
