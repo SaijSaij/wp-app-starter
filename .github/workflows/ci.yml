@@ -57,8 +57,8 @@ jobs:
             composer lint
           '
 
+  # Independent of the job installer, so both run at the same time.
   projects:
-    needs: installer
     runs-on: ubuntu-24.04
     steps:
       - name: Check out wp-app-starter

@@ -11,29 +11,44 @@ set -euo pipefail
 starter="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 workspace="$(dirname "${starter}")"
 env="${workspace}/wp-test-env"
-theme=starter-theme
-child=starter-child
-plugin=starter-plugin
+theme="starter-theme"
+child="starter-child"
+plugin="starter-plugin"
 
 step() {
     echo
     echo "== $*"
 }
 
-"${env}/bin/build" >/dev/null
+# The tools image creates the projects; the WordPress image is pulled meanwhile.
+"${env}/bin/build" tools >/dev/null
+"${env}/bin/build" wordpress >/dev/null &
+images=$!
 
 step "create ${theme}, ${child} and ${plugin}"
-"${starter}/tests/create" "${theme}" theme
-"${starter}/tests/create" "${child}" child-theme "PARENT=${theme}" "WITH_THEME=acme/${theme}@v0.1.0"
-"${starter}/tests/create" "${plugin}" plugin
+# At the same time: their Composer and npm installs take most of the time.
+pids=()
+"${starter}/tests/create" "${theme}" theme > "${workspace}/create-${theme}.log" 2>&1 & pids+=($!)
+"${starter}/tests/create" "${child}" child-theme "PARENT=${theme}" "WITH_THEME=acme/${theme}@v0.1.0" > "${workspace}/create-${child}.log" 2>&1 & pids+=($!)
+"${starter}/tests/create" "${plugin}" plugin > "${workspace}/create-${plugin}.log" 2>&1 & pids+=($!)
+failed=0
+for i in 0 1 2; do
+    project=("${theme}" "${child}" "${plugin}")
+    if wait "${pids[i]}"; then
+        echo "created ${project[i]}"
+    else
+        echo "ERROR: creating ${project[i]} failed:" >&2
+        cat "${workspace}/create-${project[i]}.log" >&2
+        failed=1
+    fi
+    rm -f "${workspace}/create-${project[i]}.log"
+done
+[[ "${failed}" == 0 ]] || exit 1
 
 for project in "${theme}" "${child}" "${plugin}"; do
     step "lint and manifest: ${project}"
     "${env}/bin/tools" -w "${project}" sh -euc 'composer lint; npm run lint; composer build-manifest'
 done
-
-step "browser tests of the checkouts"
-(cd "${env}" && bin/run "../${theme}/tests/dev.pools" "../${child}/tests/dev.pools" "../${plugin}/tests/dev.pools")
 
 # The release build takes the files Git knows.
 for project in "${theme}" "${child}" "${plugin}"; do
@@ -41,11 +56,18 @@ for project in "${theme}" "${child}" "${plugin}"; do
     git -C "${workspace}/${project}" add -A
     git -C "${workspace}/${project}" -c user.name=wp-app-starter -c user.email=wp-app-starter@example.org commit -q -m "Created with wp-app-starter"
 done
-
-step "release builds and browser tests of the release ZIPs"
-(cd "${env}" && bin/run "../${theme}/tests/release.pools")
+# The child theme's release test installs the parent theme's ZIP from tests/parent/ (ignored
+# by Git, so no release copies it): a link to the ZIP the theme's release pool builds in
+# the same run, before any instance starts.
+version="$(sed -n 's/^Version: *//p' "${workspace}/${theme}/style.css")"
 mkdir -p "${workspace}/${child}/tests/parent"
-cp "${workspace}/${theme}/dist/${theme}-"*.zip "${workspace}/${child}/tests/parent/"
-(cd "${env}" && bin/run "../${child}/tests/release.pools" "../${plugin}/tests/release.pools")
+ln -sfn "../../../${theme}/dist/${theme}-${version}.zip" "${workspace}/${child}/tests/parent/${theme}-${version}.zip"
+
+wait "${images}"
+step "browser tests of the checkouts and of the release ZIPs"
+# One run: the projects are prepared once, the releases built, all instances started together.
+(cd "${env}" && bin/run \
+    "../${theme}/tests/dev.pools" "../${child}/tests/dev.pools" "../${plugin}/tests/dev.pools" \
+    "../${theme}/tests/release.pools" "../${child}/tests/release.pools" "../${plugin}/tests/release.pools")
 
 step "all projects passed"

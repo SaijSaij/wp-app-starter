@@ -32,7 +32,9 @@ version="${BASH_REMATCH[1]}.0"
 # composer update the installer runs.
 home="${workspace}/.starter-composer"
 mkdir -p "${home}"
-cat > "${home}/config.json" <<JSON
+# Written atomically: tests/projects creates several projects at the same time.
+config="$(mktemp "${home}/config.json.XXXXXX")"
+cat > "${config}" <<JSON
 {
     "repositories": [
         {"type": "path", "url": "/workspace/wp-app-framework", "options": {"symlink": true, "versions": {"saij/wp-app-framework": "${version}"}}},
@@ -40,6 +42,7 @@ cat > "${home}/config.json" <<JSON
     ]
 }
 JSON
+mv "${config}" "${home}/config.json"
 
 environment=(
     -e "COMPOSER_HOME=/workspace/.starter-composer"
