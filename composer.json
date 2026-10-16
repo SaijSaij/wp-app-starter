@@ -6,7 +6,7 @@
     "keywords": ["wordpress", "theme", "plugin", "block", "starter"],
     "require": {
         "php": ">=8.5",
-        "saij/wp-app-framework": "^0.17"
+        "saij/wp-app-framework": "^0.18"
     },
     "autoload": {
         "psr-4": {
