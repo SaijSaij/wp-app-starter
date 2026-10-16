@@ -1,0 +1,9 @@
+{# Complete class names, so that Tailwind finds them in this template. #}
+<section {{ block_wrapper_attributes({class: attrs.highlighted ? '__TW__p-4 __TW__border-s-4 __TW__border-solid' : '__TW__p-4'}) }}>
+    {% if attrs.title or is_editor() %}
+        <h2{{ field('title') }}>{{ attrs.title }}</h2>
+    {% endif %}
+    {% if attrs.text or is_editor() %}
+        <div{{ field('text') }}>{{ attrs.text|raw }}</div>
+    {% endif %}
+</section>

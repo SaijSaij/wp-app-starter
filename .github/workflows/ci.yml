@@ -1,0 +1,94 @@
+# Checks of the starter on every push and pull request, and the release gate of
+# wp-app-framework (called by its release workflow with the framework of the tag):
+# the tests of the installer, then a theme, a child theme and a plugin created
+# from the starter with every option, checked in wp-test-env (tests/projects).
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_call:
+    inputs:
+      starter-ref:
+        description: Ref of SaijSaij/wp-app-starter to check (required when called from another repository).
+        type: string
+        default: ''
+      framework-ref:
+        description: Ref of SaijSaij/wp-app-framework the projects are created with.
+        type: string
+        default: main
+      wp-test-env-ref:
+        description: Ref of SaijSaij/wp-test-env.
+        type: string
+        default: main
+
+permissions:
+  contents: read
+
+jobs:
+  installer:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Check out wp-app-starter
+        uses: actions/checkout@v5
+        with:
+          repository: SaijSaij/wp-app-starter
+          ref: ${{ inputs.starter-ref || github.sha }}
+          path: workspace/wp-app-starter
+
+      - name: Check out wp-test-env
+        uses: actions/checkout@v5
+        with:
+          repository: SaijSaij/wp-test-env
+          ref: ${{ inputs.wp-test-env-ref || 'main' }}
+          path: workspace/wp-test-env
+
+      - name: Build the tools image
+        working-directory: workspace/wp-test-env
+        run: bin/build tools
+
+      - name: Tests and lint of the installer
+        working-directory: workspace/wp-test-env
+        run: |
+          bin/tools -w wp-app-starter/tests sh -euc '
+            composer install --no-interaction --no-progress
+            composer test
+            composer lint
+          '
+
+  projects:
+    needs: installer
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Check out wp-app-starter
+        uses: actions/checkout@v5
+        with:
+          repository: SaijSaij/wp-app-starter
+          ref: ${{ inputs.starter-ref || github.sha }}
+          path: workspace/wp-app-starter
+
+      - name: Check out wp-app-framework
+        uses: actions/checkout@v5
+        with:
+          repository: SaijSaij/wp-app-framework
+          ref: ${{ inputs.framework-ref || 'main' }}
+          path: workspace/wp-app-framework
+
+      - name: Check out wp-test-env
+        uses: actions/checkout@v5
+        with:
+          repository: SaijSaij/wp-test-env
+          ref: ${{ inputs.wp-test-env-ref || 'main' }}
+          path: workspace/wp-test-env
+
+      - name: Create and check a theme, a child theme and a plugin
+        run: workspace/wp-app-starter/tests/projects
+
+      - name: Keep the test results
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: starter-results
+          path: workspace/wp-test-env/results/
+          if-no-files-found: ignore

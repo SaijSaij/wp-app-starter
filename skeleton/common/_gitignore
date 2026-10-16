@@ -1,0 +1,11 @@
+/vendor/
+/vendor-prefixed/
+/node_modules/
+/generated/
+/build/
+/dist/
+@@if child-theme
+@@if e2e
+/tests/parent/*.zip
+@@endif
+@@endif

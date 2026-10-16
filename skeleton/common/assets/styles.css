@@ -1,0 +1,31 @@
+/*
+ * Stylesheet, compiled with Tailwind CSS by the framework's webpack helper into
+ * build/styles.css and loaded on the front end and in the editor canvas.
+@@if plugin
+ * Class names are global: the prefix __PREFIX__ keeps them apart from the theme's
+ * (write them as __TW__p-4).
+@@endif
+@@if theme
+ * Tokens point to the CSS variables WordPress generates from theme.json.
+@@endif
+@@if child-theme
+ * The child theme shares the design of its parent theme: no prefix.
+@@endif
+ */
+@layer theme, base, components, utilities;
+@@if plugin
+@import "tailwindcss/theme.css" layer(theme) prefix(__PREFIX__);
+@import "tailwindcss/utilities.css" layer(utilities) source(none) prefix(__PREFIX__);
+@@else
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities) source(none);
+@@endif
+
+@source "../src/**/*.twig";
+@@if theme
+
+@theme inline {
+	--color-primary: var(--wp--preset--color--primary);
+	--color-contrast: var(--wp--preset--color--contrast);
+}
+@@endif

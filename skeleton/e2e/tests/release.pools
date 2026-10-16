@@ -1,0 +1,30 @@
+# Test pools of the release ZIP, for bin/run of wp-test-env
+# (https://github.com/saijsaij/wp-test-env), e.g.
+#
+#   bin/run ../__SLUG__/tests/release.pools
+#
+# Builds the release ZIP (composer release needs a Git repository) and installs the
+# newest ZIP of dist/.
+@@if child-theme
+# The parent theme comes from the newest ZIP in tests/parent/ (ignored by Git): put a
+# release ZIP of __PARENT__ there.
+@@endif
+@@if plugin
+# The plugin runs on the default theme of WordPress.
+@@endif
+prepare __SLUG__
+tools __SLUG__ composer release
+
+pool __SLUG__-release
+instances 2
+@@if theme
+theme-zip __SLUG__/dist/__SLUG__-*.zip
+@@endif
+@@if child-theme
+theme-zip __SLUG__/tests/parent/*.zip
+child-theme-zip __SLUG__/dist/__SLUG__-*.zip
+@@endif
+@@if plugin
+plugin-zip __SLUG__/dist/__SLUG__-*.zip
+@@endif
+e2e __SLUG__

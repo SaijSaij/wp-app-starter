@@ -1,0 +1,40 @@
+# Release for a tag v<version> (= Version in __VERSION_FILE__): builds the ZIP with
+# the release workflow of wp-app-framework, tests it in a plain WordPress and
+# attaches it to the GitHub release of the tag
+# (https://saijsaij.github.io/wp-app-framework/next/build-and-release/ci.html).
+@@if child-theme
+# The release test installs the child theme on top of a release of its parent theme.
+@@endif
+@@if plugin
+@@if with-theme
+# The release test installs the plugin next to a release of a theme.
+@@else
+# The release test runs the plugin on the default theme of WordPress; name a theme
+# release with with-theme if the tests depend on a theme.
+@@endif
+@@endif
+name: Release
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    # Keep the ref at the framework version the lock file installs.
+    uses: SaijSaij/wp-app-framework/.github/workflows/consumer-release.yml@__FRAMEWORK_REF__
+@@if with-theme
+    with:
+      with-theme: __WITH_THEME__
+@@if !e2e
+      e2e: false
+@@endif
+@@else
+@@if !e2e
+    with:
+      e2e: false
+@@endif
+@@endif

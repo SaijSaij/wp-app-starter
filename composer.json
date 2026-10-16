@@ -1,0 +1,26 @@
+{
+    "name": "saij/wp-app-starter",
+    "description": "Creates a theme, child theme or plugin built with wp-app-framework: composer create-project saij/wp-app-starter <directory>.",
+    "type": "project",
+    "license": "GPL-2.0-or-later",
+    "keywords": ["wordpress", "theme", "plugin", "block", "starter"],
+    "require": {
+        "php": ">=8.5",
+        "saij/wp-app-framework": "^0.16"
+    },
+    "autoload": {
+        "psr-4": {
+            "Saij\\WpAppStarter\\": "installer/"
+        }
+    },
+    "scripts": {
+        "post-create-project-cmd": "Saij\\WpAppStarter\\Installer::run"
+    },
+    "config": {
+        "platform": {
+            "php": "8.5"
+        },
+        "platform-check": false,
+        "sort-packages": true
+    }
+}

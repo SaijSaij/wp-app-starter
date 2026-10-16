@@ -1,0 +1,7 @@
+parameters:
+    level: max
+    # The installer runs in the PHP of the user's Composer, not in the PHP 8.5 of the projects.
+    phpVersion: 80100
+    paths:
+        - ../installer
+        - Unit

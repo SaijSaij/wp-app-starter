@@ -1,0 +1,32 @@
+{
+    "name": "saij/wp-app-starter-tests",
+    "description": "Tests and checks of the installer of wp-app-starter; not part of the created projects.",
+    "type": "project",
+    "license": "GPL-2.0-or-later",
+    "require-dev": {
+        "composer/composer": "^2.10",
+        "friendsofphp/php-cs-fixer": "^3.95",
+        "phpstan/phpstan": "^2.3",
+        "phpunit/phpunit": "^13.4"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Saij\\WpAppStarter\\": "../installer/",
+            "Saij\\WpAppStarter\\Tests\\": "Unit/"
+        }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "lint": [
+            "phpstan analyse --no-progress --memory-limit=1G",
+            "php-cs-fixer check --diff"
+        ],
+        "fix": "php-cs-fixer fix"
+    },
+    "config": {
+        "platform": {
+            "php": "8.5"
+        },
+        "sort-packages": true
+    }
+}

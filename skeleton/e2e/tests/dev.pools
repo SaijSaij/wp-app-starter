@@ -1,0 +1,30 @@
+# Test pools in development mode, for bin/run of wp-test-env
+# (https://github.com/saijsaij/wp-test-env). Paths are relative to the workspace of
+# wp-test-env: the directory that contains this project (wp-test-env checked out next
+# to it, or WP_TEST_ENV_WORKSPACE), e.g.
+#
+#   bin/run ../__SLUG__/tests/dev.pools
+#
+@@if child-theme
+# The parent theme __PARENT__ must lie next to this project, ready to run (a checkout
+# with its dependencies installed and its scripts built, or an unpacked release ZIP).
+@@endif
+@@if plugin
+# The plugin runs on the default theme of WordPress.
+@@endif
+prepare __SLUG__
+
+pool __SLUG__
+instances 2
+@@if theme
+themes __SLUG__
+activate __SLUG__
+@@endif
+@@if child-theme
+themes __PARENT__ __SLUG__
+activate __SLUG__
+@@endif
+@@if plugin
+plugins __SLUG__
+@@endif
+e2e __SLUG__
