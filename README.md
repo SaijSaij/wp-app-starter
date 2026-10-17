@@ -1,6 +1,6 @@
 # wp-app-starter
 
-Creates a theme, a child theme or a plugin built with [wp-app-framework](https://github.com/saijsaij/wp-app-framework), ready for development:
+Creates a theme, a child theme or a plugin built with [wp-app-framework](https://github.com/webcodingcat/wp-app-framework), ready for development:
 
 ```sh
 composer create-project saij/wp-app-starter my-theme
@@ -17,7 +17,7 @@ The directory name is the slug of the project. The installer asks for the rest:
 | PHP namespace | of `src/`, suggested from the package name (`acme/my-theme` → `Acme\MyTheme`) |
 | Namespace | of the framework: the name in front of blocks, REST routes, settings, post types and tables; no default, because content refers to it |
 | Tailwind prefix | plugins only, so their classes do not collide with the theme's |
-| Options | an example block, PHPStan/PHP-CS-Fixer/ESLint, the GitHub release workflow, browser tests for [wp-test-env](https://github.com/saijsaij/wp-test-env); each yes by default |
+| Options | an example block, PHPStan/PHP-CS-Fixer/ESLint, the GitHub release workflow, browser tests for [wp-test-env](https://github.com/webcodingcat/wp-test-env); each yes by default |
 | Theme release | with the release workflow: the parent theme release of a child theme (required), a theme release for a plugin (optional; without, the default theme of WordPress) |
 
 Then it writes the project, installs its dependencies and, if Node 24 or newer is available, builds its scripts and styles; without Node it says how to build later. The project's `README.md` lists its commands. You need Composer; the installer runs in Composer's PHP (8.1 or newer), the project itself needs PHP 8.5.

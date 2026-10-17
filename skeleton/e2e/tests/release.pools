@@ -1,5 +1,5 @@
 # Test pools of the release ZIP, for bin/run of wp-test-env
-# (https://github.com/saijsaij/wp-test-env), e.g.
+# (https://github.com/webcodingcat/wp-test-env), e.g.
 #
 #   bin/run ../__SLUG__/tests/release.pools
 #

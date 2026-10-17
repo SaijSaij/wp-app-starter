@@ -1,5 +1,5 @@
 # Test pools in development mode, for bin/run of wp-test-env
-# (https://github.com/saijsaij/wp-test-env). Paths are relative to the workspace of
+# (https://github.com/webcodingcat/wp-test-env). Paths are relative to the workspace of
 # wp-test-env: the directory that contains this project (wp-test-env checked out next
 # to it, or WP_TEST_ENV_WORKSPACE), e.g.
 #

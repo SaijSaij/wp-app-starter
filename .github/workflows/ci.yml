@@ -11,15 +11,15 @@ on:
   workflow_call:
     inputs:
       starter-ref:
-        description: Ref of SaijSaij/wp-app-starter to check (required when called from another repository).
+        description: Ref of webcodingcat/wp-app-starter to check (required when called from another repository).
         type: string
         default: ''
       framework-ref:
-        description: Ref of SaijSaij/wp-app-framework the projects are created with.
+        description: Ref of webcodingcat/wp-app-framework the projects are created with.
         type: string
         default: main
       wp-test-env-ref:
-        description: Ref of SaijSaij/wp-test-env.
+        description: Ref of webcodingcat/wp-test-env.
         type: string
         default: main
 
@@ -33,14 +33,14 @@ jobs:
       - name: Check out wp-app-starter
         uses: actions/checkout@v5
         with:
-          repository: SaijSaij/wp-app-starter
+          repository: webcodingcat/wp-app-starter
           ref: ${{ inputs.starter-ref || github.sha }}
           path: workspace/wp-app-starter
 
       - name: Check out wp-test-env
         uses: actions/checkout@v5
         with:
-          repository: SaijSaij/wp-test-env
+          repository: webcodingcat/wp-test-env
           ref: ${{ inputs.wp-test-env-ref || 'main' }}
           path: workspace/wp-test-env
 
@@ -64,21 +64,21 @@ jobs:
       - name: Check out wp-app-starter
         uses: actions/checkout@v5
         with:
-          repository: SaijSaij/wp-app-starter
+          repository: webcodingcat/wp-app-starter
           ref: ${{ inputs.starter-ref || github.sha }}
           path: workspace/wp-app-starter
 
       - name: Check out wp-app-framework
         uses: actions/checkout@v5
         with:
-          repository: SaijSaij/wp-app-framework
+          repository: webcodingcat/wp-app-framework
           ref: ${{ inputs.framework-ref || 'main' }}
           path: workspace/wp-app-framework
 
       - name: Check out wp-test-env
         uses: actions/checkout@v5
         with:
-          repository: SaijSaij/wp-test-env
+          repository: webcodingcat/wp-test-env
           ref: ${{ inputs.wp-test-env-ref || 'main' }}
           path: workspace/wp-test-env
 

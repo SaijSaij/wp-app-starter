@@ -13,7 +13,7 @@ A child theme of `__PARENT__`
 @@if plugin
 A WordPress plugin
 @@endif
-built with [wp-app-framework](https://saijsaij.github.io/wp-app-framework/): blocks, hooks and settings are PHP classes with attributes in `src/`, their markup is Twig, their styles Tailwind CSS.
+built with [wp-app-framework](https://webcodingcat.github.io/wp-app-framework/): blocks, hooks and settings are PHP classes with attributes in `src/`, their markup is Twig, their styles Tailwind CSS.
 
 - Slug (directory name): `__SLUG__`
 - Namespace: `__WP_NAMESPACE__`, the name in front of blocks (`__WP_NAMESPACE__/…`), REST routes, settings options, post types and tables; content refers to it, so keep it.
@@ -42,7 +42,7 @@ Put the directory into `wp-content/__KIND_DIRECTORY__/` of a WordPress installat
 `src/Block/Teaser/` holds an example block, `__WP_NAMESPACE__/teaser`. Delete the directory when you no longer need it.
 
 @@endif
-The [documentation](https://saijsaij.github.io/wp-app-framework/) explains blocks, the editor, settings, post types and everything else.
+The [documentation](https://webcodingcat.github.io/wp-app-framework/) explains blocks, the editor, settings, post types and everything else.
 
 @@if quality
 ## Checks
@@ -79,10 +79,10 @@ Keep the framework version of the workflow (`consumer-release.yml@__FRAMEWORK_RE
 @@if e2e
 ## Browser tests
 
-The browser tests in `tests/e2e/` run with [wp-test-env](https://github.com/saijsaij/wp-test-env), which starts fresh WordPress instances in Docker. Check it out next to this project; the directory that contains both is its workspace:
+The browser tests in `tests/e2e/` run with [wp-test-env](https://github.com/webcodingcat/wp-test-env), which starts fresh WordPress instances in Docker. Check it out next to this project; the directory that contains both is its workspace:
 
 ```sh
-git clone https://github.com/saijsaij/wp-test-env.git ../wp-test-env
+git clone https://github.com/webcodingcat/wp-test-env.git ../wp-test-env
 cd ../wp-test-env
 bin/run ../__SLUG__/tests/dev.pools       # the checkout, in development mode
 bin/run ../__SLUG__/tests/release.pools   # the release ZIP
