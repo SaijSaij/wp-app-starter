@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Saij\WpAppStarter\Tests;
+namespace WebCodingCat\WpAppStarter\Tests;
 
 use InvalidArgumentException;
-use Saij\WpAppStarter\Prompt;
+use WebCodingCat\WpAppStarter\Prompt;
 
 /**
  * Answers questions from a list by key; a key without answer takes the default. Records the questions and

@@ -1,6 +1,6 @@
 # CLAUDE.md – wp-app-starter
 
-Composer project `saij/wp-app-starter`: `composer create-project saij/wp-app-starter <dir>` creates a theme, child theme or plugin built with [wp-app-framework](https://github.com/webcodingcat/wp-app-framework). The installer (`installer/`) asks the questions in `post-create-project-cmd`, renders the parts of `skeleton/` into the project, removes the starter's own files and runs `composer update` and, with Node 24, `npm install` and `npm run build`. Framework principles, conventions and testing rules: the [developer documentation](https://webcodingcat.github.io/wp-app-framework/next/development/) (in the framework checkout `docs/content/development/`) and the framework's CLAUDE.md; this file covers the starter.
+Composer project `webcodingcat/wp-app-starter`: `composer create-project webcodingcat/wp-app-starter <dir>` creates a theme, child theme or plugin built with [wp-app-framework](https://github.com/webcodingcat/wp-app-framework). The installer (`installer/`) asks the questions in `post-create-project-cmd`, renders the parts of `skeleton/` into the project, removes the starter's own files and runs `composer update` and, with Node 24, `npm install` and `npm run build`. Framework principles, conventions and testing rules: the [developer documentation](https://webcodingcat.github.io/wp-app-framework/next/development/) (in the framework checkout `docs/content/development/`) and the framework's CLAUDE.md; this file covers the starter.
 
 ## Rules
 
@@ -36,7 +36,7 @@ tests/projects                                                    # theme, child
 
 ## Keep in sync
 
-- `require` of `saij/wp-app-framework` in `composer.json` follows the framework's minor versions: after a framework release, raise it (e.g. `^0.18`) and tag the starter. The generated release workflow uses the tag of the installed framework.
+- `require` of `webcodingcat/wp-app-framework` in `composer.json` follows the framework's minor versions: after a framework release, raise it (e.g. `^0.18`) and tag the starter. The generated release workflow uses the tag of the installed framework.
 - Versions in the generated `composer.json` and `package.json` (`installer/Generator.php`: PHPStan, PHP-CS-Fixer, `@wordpress/scripts`, Tailwind, Playwright) follow the framework's test projects (theme-dev-test); `@playwright/test` is exact, because wp-test-env runs the image of that version.
 - `skeleton/e2e/tests/e2e/` follows the browser test setup of theme-dev-test (`playwright.config.js`, `fixtures.js`).
 - Tags `v<semver>`; every GitHub release gets short release notes (what changed for created projects, the framework version it requires) instead of the generated compare link alone.

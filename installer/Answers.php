@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Saij\WpAppStarter;
+namespace WebCodingCat\WpAppStarter;
 
 /**
  * Everything the questions of the installer found out about the new project.

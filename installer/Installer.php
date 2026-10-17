@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Saij\WpAppStarter;
+namespace WebCodingCat\WpAppStarter;
 
 use Composer\IO\IOInterface;
 use Composer\Script\Event;
 use RuntimeException;
 
 /**
- * Turns the starter into a new project after `composer create-project saij/wp-app-starter <directory>`
+ * Turns the starter into a new project after `composer create-project webcodingcat/wp-app-starter <directory>`
  * (script post-create-project-cmd): asks the questions, writes the project, removes the starter's own files,
  * installs the dependencies of the project and, if Node 24 or newer is available, builds its scripts.
  *
@@ -26,13 +26,13 @@ final class Installer
         $io = $event->getIO();
         $root = (string) getcwd();
         $composer = $event->getComposer();
-        $link = $composer->getPackage()->getRequires()['saij/wp-app-framework'] ?? null;
+        $link = $composer->getPackage()->getRequires()['webcodingcat/wp-app-framework'] ?? null;
         if ($link === null) {
-            throw new RuntimeException('The composer.json of the starter does not require saij/wp-app-framework.');
+            throw new RuntimeException('The composer.json of the starter does not require webcodingcat/wp-app-framework.');
         }
-        $installed = $composer->getRepositoryManager()->getLocalRepository()->findPackage('saij/wp-app-framework', '*');
+        $installed = $composer->getRepositoryManager()->getLocalRepository()->findPackage('webcodingcat/wp-app-framework', '*');
         if ($installed === null) {
-            throw new RuntimeException('saij/wp-app-framework is not installed; run create-project without --no-install.');
+            throw new RuntimeException('webcodingcat/wp-app-framework is not installed; run create-project without --no-install.');
         }
 
         $io->write('<info>Create a theme, child theme or plugin with wp-app-framework</info>');

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Saij\WpAppStarter\Tests;
+namespace WebCodingCat\WpAppStarter\Tests;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
-use Saij\WpAppStarter\Rules;
+use WebCodingCat\WpAppStarter\Rules;
 
 final class RulesTest extends TestCase
 {
@@ -21,9 +21,9 @@ final class RulesTest extends TestCase
         yield 'package without vendor' => ['package', 'my-theme', false];
         yield 'PHP namespace' => ['phpNamespace', 'Acme\\MyTheme', true];
         yield 'PHP namespace without vendor' => ['phpNamespace', 'MyTheme', false];
-        yield 'PHP namespace of the framework' => ['phpNamespace', 'Saij\\WpAppFramework', false];
-        yield 'PHP namespace inside the framework' => ['phpNamespace', 'Saij\\WpAppFramework\\Theme', false];
-        yield 'PHP namespace next to the framework' => ['phpNamespace', 'Saij\\WpAppFrameworkDemo', true];
+        yield 'PHP namespace of the framework' => ['phpNamespace', 'WebCodingCat\\WpAppFramework', false];
+        yield 'PHP namespace inside the framework' => ['phpNamespace', 'WebCodingCat\\WpAppFramework\\Theme', false];
+        yield 'PHP namespace next to the framework' => ['phpNamespace', 'WebCodingCat\\WpAppFrameworkDemo', true];
         yield 'namespace' => ['namespace', 'acme-2', true];
         yield 'namespace with a digit first' => ['namespace', '2acme', false];
         yield 'reserved namespace' => ['namespace', 'core', false];

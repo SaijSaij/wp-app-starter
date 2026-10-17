@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Saij\WpAppStarter\Tests;
+namespace WebCodingCat\WpAppStarter\Tests;
 
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
-use Saij\WpAppStarter\Answers;
-use Saij\WpAppStarter\Questions;
+use WebCodingCat\WpAppStarter\Answers;
+use WebCodingCat\WpAppStarter\Questions;
 
 final class QuestionsTest extends TestCase
 {

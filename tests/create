@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Creates a project from this checkout of the starter without interaction, as
-# `composer create-project saij/wp-app-starter <slug> --no-interaction` would, with the
+# `composer create-project webcodingcat/wp-app-starter <slug> --no-interaction` would, with the
 # framework checkout instead of a release from Packagist. The starter, wp-app-framework
 # and wp-test-env lie next to each other in one directory, the workspace of wp-test-env;
 # the project is created there as <slug> (an existing directory is replaced).
@@ -24,7 +24,7 @@ tools="${workspace}/wp-test-env/bin/tools"
 [[ -d "${workspace}/wp-app-framework" ]] || { echo "ERROR: wp-app-framework is not checked out next to the starter." >&2; exit 1; }
 
 # The framework checkout stands in for the version the starter requires (^0.16 → 0.16.0).
-constraint="$(sed -n 's/.*"saij\/wp-app-framework": *"\([^"]*\)".*/\1/p' "${starter}/composer.json")"
+constraint="$(sed -n 's/.*"webcodingcat\/wp-app-framework": *"\([^"]*\)".*/\1/p' "${starter}/composer.json")"
 [[ "${constraint}" =~ ^\^([0-9]+\.[0-9]+)$ ]] || { echo "ERROR: cannot derive a version from the constraint '${constraint}'." >&2; exit 1; }
 version="${BASH_REMATCH[1]}.0"
 
@@ -37,8 +37,8 @@ config="$(mktemp "${home}/config.json.XXXXXX")"
 cat > "${config}" <<JSON
 {
     "repositories": [
-        {"type": "path", "url": "/workspace/wp-app-framework", "options": {"symlink": true, "versions": {"saij/wp-app-framework": "${version}"}}},
-        {"type": "path", "url": "/workspace/$(basename "${starter}")", "options": {"symlink": false, "versions": {"saij/wp-app-starter": "0.0.0"}}}
+        {"type": "path", "url": "/workspace/wp-app-framework", "options": {"symlink": true, "versions": {"webcodingcat/wp-app-framework": "${version}"}}},
+        {"type": "path", "url": "/workspace/$(basename "${starter}")", "options": {"symlink": false, "versions": {"webcodingcat/wp-app-starter": "0.0.0"}}}
     ]
 }
 JSON
@@ -59,4 +59,4 @@ for answer in "$@"; do
 done
 
 rm -rf "${workspace:?}/${slug}"
-"${tools}" "${environment[@]}" composer create-project saij/wp-app-starter "${slug}" 0.0.0 --no-interaction --no-progress
+"${tools}" "${environment[@]}" composer create-project webcodingcat/wp-app-starter "${slug}" 0.0.0 --no-interaction --no-progress

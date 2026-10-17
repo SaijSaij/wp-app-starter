@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Saij\WpAppStarter;
+namespace WebCodingCat\WpAppStarter;
 
 /**
  * Asks the questions of the installer: on the console, or from environment variables without interaction.

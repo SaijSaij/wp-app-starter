@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace __PHP_NAMESPACE__\Block\Teaser;
 
-use Saij\WpAppFramework\Block\Block;
-use Saij\WpAppFramework\Block\BlockCategory;
-use Saij\WpAppFramework\Twig\TemplateRenderer;
+use WebCodingCat\WpAppFramework\Block\Block;
+use WebCodingCat\WpAppFramework\Block\BlockCategory;
+use WebCodingCat\WpAppFramework\Twig\TemplateRenderer;
 
 /**
  * An example block: a title and a text edited in the editor canvas, and a switch in the inspector.

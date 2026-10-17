@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Saij\WpAppStarter;
+namespace WebCodingCat\WpAppStarter;
 
 use Composer\IO\IOInterface;
 use InvalidArgumentException;

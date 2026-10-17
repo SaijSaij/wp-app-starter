@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Saij\WpAppStarter\Tests;
+namespace WebCodingCat\WpAppStarter\Tests;
 
 use PHPUnit\Framework\TestCase;
-use Saij\WpAppStarter\Installer;
+use WebCodingCat\WpAppStarter\Installer;
 
 final class InstallerTest extends TestCase
 {

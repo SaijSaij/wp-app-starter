@@ -3,7 +3,7 @@
 Creates a theme, a child theme or a plugin built with [wp-app-framework](https://github.com/webcodingcat/wp-app-framework), ready for development:
 
 ```sh
-composer create-project saij/wp-app-starter my-theme
+composer create-project webcodingcat/wp-app-starter my-theme
 ```
 
 The directory name is the slug of the project. The installer asks for the rest:
@@ -26,7 +26,7 @@ Without interaction (`--no-interaction`), the answers come from environment vari
 
 ```sh
 WP_APP_STARTER_KIND=plugin WP_APP_STARTER_PACKAGE=acme/shop WP_APP_STARTER_NAMESPACE=shop \
-  composer create-project saij/wp-app-starter shop --no-interaction
+  composer create-project webcodingcat/wp-app-starter shop --no-interaction
 ```
 
 ## Development

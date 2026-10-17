@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Saij\WpAppStarter;
+namespace WebCodingCat\WpAppStarter;
 
 /**
  * The checks of the answers. Each returns the error message, or null if the value is valid.
@@ -45,8 +45,8 @@ final class Rules
         if (preg_match('/^[A-Za-z_][A-Za-z0-9_]*(\\\\[A-Za-z_][A-Za-z0-9_]*)+$/', $value) !== 1) {
             return sprintf('"%s" is no valid PHP namespace with a vendor part, e.g. Acme\\MyTheme.', $value);
         }
-        if ($value === 'Saij\\WpAppFramework' || str_starts_with($value, 'Saij\\WpAppFramework\\')) {
-            return 'The namespace Saij\\WpAppFramework belongs to the framework.';
+        if ($value === 'WebCodingCat\\WpAppFramework' || str_starts_with($value, 'WebCodingCat\\WpAppFramework\\')) {
+            return 'The namespace WebCodingCat\\WpAppFramework belongs to the framework.';
         }
 
         return null;

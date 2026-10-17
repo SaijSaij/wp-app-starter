@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Saij\WpAppStarter\Tests;
+namespace WebCodingCat\WpAppStarter\Tests;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
-use Saij\WpAppStarter\Answers;
-use Saij\WpAppStarter\Generator;
+use WebCodingCat\WpAppStarter\Answers;
+use WebCodingCat\WpAppStarter\Generator;
 
 final class GeneratorTest extends TestCase
 {
@@ -90,7 +90,7 @@ final class GeneratorTest extends TestCase
         $composer = self::composer($files['composer.json']);
 
         self::assertSame('wordpress-plugin', $composer['type']);
-        self::assertSame(['php' => '>=8.5', 'saij/wp-app-framework' => '^0.16'], $composer['require']);
+        self::assertSame(['php' => '>=8.5', 'webcodingcat/wp-app-framework' => '^0.16'], $composer['require']);
         self::assertSame(['Acme\\Plugin\\' => 'src/'], $composer['autoload']['psr-4']);
         self::assertSame(['namespace' => 'acme-plugin'], $composer['extra']['wp-app-framework']);
         self::assertSame('Acme\\Plugin\\Vendor\\', $composer['extra']['strauss']['namespace_prefix']);

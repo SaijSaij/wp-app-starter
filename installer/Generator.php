@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Saij\WpAppStarter;
+namespace WebCodingCat\WpAppStarter;
 
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
@@ -26,7 +26,7 @@ final class Generator
     public const PARTS = ['common', 'example', 'quality', 'ci', 'e2e'];
 
     /**
-     * @param string $frameworkConstraint Version constraint of saij/wp-app-framework, as the starter requires it.
+     * @param string $frameworkConstraint Version constraint of webcodingcat/wp-app-framework, as the starter requires it.
      * @param string $frameworkRef        Ref of wp-app-framework for consumer-release.yml, e.g. v0.16.0 or main.
      */
     public function __construct(
@@ -229,7 +229,7 @@ final class Generator
         if ($a->getAuthor() !== '') {
             $json['authors'] = [['name' => $a->getAuthor()]];
         }
-        $json['require'] = ['php' => '>=8.5', 'saij/wp-app-framework' => $this->frameworkConstraint];
+        $json['require'] = ['php' => '>=8.5', 'webcodingcat/wp-app-framework' => $this->frameworkConstraint];
         if ($a->hasQuality()) {
             $json['require-dev'] = [
                 'friendsofphp/php-cs-fixer' => '^3.95',
@@ -284,7 +284,7 @@ final class Generator
             $scripts['test:e2e'] = 'playwright test --config tests/e2e/playwright.config.js';
         }
         $dependencies = [
-            '@saij/wp-app-framework' => 'file:vendor/saij/wp-app-framework',
+            '@webcodingcat/wp-app-framework' => 'file:vendor/webcodingcat/wp-app-framework',
             '@tailwindcss/webpack' => '^4.3.3',
             '@wordpress/scripts' => '^36.1.0',
             'tailwindcss' => '^4.3.3',

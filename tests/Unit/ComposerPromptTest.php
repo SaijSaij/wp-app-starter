@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Saij\WpAppStarter\Tests;
+namespace WebCodingCat\WpAppStarter\Tests;
 
 use Composer\IO\BufferIO;
 use Composer\IO\NullIO;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
-use Saij\WpAppStarter\ComposerPrompt;
-use Saij\WpAppStarter\Rules;
+use WebCodingCat\WpAppStarter\ComposerPrompt;
+use WebCodingCat\WpAppStarter\Rules;
 
 final class ComposerPromptTest extends TestCase
 {
